@@ -53,6 +53,9 @@ sudo apt install php libapache2-mod-php -y
 sudo apt install python3-pip -y
 sudo apt-get install pylint -y
 
+# Dependencia para clipboard
+sudo apt install xclip
+
 echo "NEOVIM Y SERVIDORES DE LENGUAJES INSTALADOS"
 
 echo ""
