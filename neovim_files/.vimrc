@@ -73,6 +73,9 @@ Plug 'mattn/emmet-vim'
 " Agregando soporte para blade
 Plug 'jwalton512/vim-blade'
 
+" Lorem ipsum text plugin
+Plug 'https://github.com/wolandark/vim-loremipsum.git'
+
 
 call plug#end()
 " Instalar plugins con VimPlug
@@ -251,6 +254,12 @@ nmap <silent> gR <Plug>(coc-references)
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " moverse entre las opciones con tab y shift+tab
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
