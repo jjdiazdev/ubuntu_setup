@@ -36,7 +36,9 @@ sudo npm i -g pyright
 sudo npm i -g sql-language-server
 sudo npm i -g html
 sudo npm i -g css
-sudo npm i -g javascript-typescript-langserver
+sudo npm i -g typescript-language-server typescript
+# Plugin de React (opcional, pero mejora la experiencia JSX)
+sudo npm i -g @typescript-eslint/eslint-plugin
 
 # Instalar PHP, Composer y servidor de lenguaje para PHP (felixfbecker)
 # Dependencias PHP/Composer
