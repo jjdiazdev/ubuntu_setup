@@ -99,3 +99,50 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias lg="lazygit"
+alias nv="nvim"
+alias gs="git status -s"
+alias gl="git log --oneline"
+
+# tt [nombre] → crea o entra a la sesión tmux del proyecto actual
+tt() {
+  local name="${1:-$(basename "$PWD" | tr '.:' '__')}"
+  if [ -n "$TMUX" ]; then
+    tmux has-session -t "=$name" 2>/dev/null || tmux new-session -d -s "$name" -c "$PWD"
+    tmux switch-client -t "=$name"
+  else
+    tmux new-session -A -s "$name" -c "$PWD"
+  fi
+}
+
+# tts [carpeta...] → abre una sesión tmux por proyecto de ~/Workspace/Sortek
+#   tts                         todas las carpetas de primer nivel
+#   tts input-manager sortek-web-frontend   solo esas
+# Las sesiones que ya existen no se duplican. Al final entra en la primera.
+tts() {
+  local base="${TTS_BASE:-$HOME/Workspace/Sortek}"
+  local -a dirs
+  local d name first=""
+  if (( $# )); then
+    for d in "$@"; do dirs+=("$base/$d"); done
+  else
+    dirs=("$base"/*(/N))
+  fi
+  for d in "${dirs[@]}"; do
+    if [[ ! -d "$d" ]]; then
+      echo "No existe: $d" >&2
+      continue
+    fi
+    name="$(basename "$d" | tr '.:' '__')"
+    tmux has-session -t "=$name" 2>/dev/null || tmux new-session -d -s "$name" -c "$d"
+    echo "✓ $name"
+    [[ -z "$first" ]] && first="$name"
+  done
+  [[ -z "$first" ]] && return 1
+  if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "=$first"
+  else
+    tmux attach-session -t "=$first"
+  fi
+}

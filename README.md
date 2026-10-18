@@ -50,6 +50,11 @@ Durante la instalación se solicitará tu contraseña para ejecutar comandos con
 - **Ollama** (IA local):
   - Instalación vía script oficial (`curl -fsSL https://ollama.com/install.sh | sh`).
   - Descarga del modelo `qwen2.5-coder:1.5b`.
+- **tmux** (multiplexor de terminal):
+  - Instalación de `tmux` y `git`, descarga de TPM (`~/.tmux/plugins/tpm`) e instalación de `tmux-resurrect`.
+  - Herramienta de portapapeles según la sesión: `wl-clipboard` (Wayland) o `xclip` (X11).
+  - Copia de `tmux_files/.tmux.conf` a `~/.tmux.conf` (respalda la anterior en `~/.tmux.conf.bak`).
+  - Atajos `tt` y `tts` en `.zshrc` para crear o entrar a sesiones por proyecto.
 
 ### Uso después de instalar
 
@@ -68,13 +73,16 @@ Durante la instalación se solicitará tu contraseña para ejecutar comandos con
 ollama list
 ```
 
+- Si los complementos de tmux no se instalaron, dentro de tmux pulsa `Ctrl+b` y luego `I` (i mayúscula).
+
 ### Estructura de scripts
 
-- `install.sh`: orquestación. Ejecuta en orden: `update.sh`, `neovim.sh`, `ollama.sh`, `zsh.sh`, `update.sh` y luego inicia `/bin/zsh`.
+- `install.sh`: orquestación. Ejecuta en orden: `update.sh`, `neovim.sh`, `ollama.sh`, `zsh.sh`, `tmux.sh`, `update.sh` y luego inicia `/bin/zsh`.
 - `update.sh`: actualiza y limpia paquetes.
 - `neovim.sh`: instala Snap, Neovim, configura Vim/Neovim, instala Node/npm, actualiza Node con `n`, instala servidores de lenguaje y herramientas (PHP, Composer, pip, pylint).
 - `ollama.sh`: instala `curl`, Ollama y descarga `qwen2.5-coder:1.5b`.
 - `zsh.sh`: instala `zsh`, copia Oh My Zsh y `.zshrc`, cambia el shell por defecto.
+- `tmux.sh`: instala `tmux`, TPM, `tmux-resurrect` y la herramienta de portapapeles, y copia `.tmux.conf`.
 
 ### Notas importantes
 

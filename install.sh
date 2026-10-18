@@ -2,7 +2,7 @@
 
 # Script: install.sh
 # Propósito: Orquestar la instalación completa del entorno
-# Orden: update -> neovim -> ollama -> zsh -> update final -> instrucciones finales
+# Orden: update -> neovim -> ollama -> zsh -> tmux -> update final -> instrucciones finales
 
 # Actualizando el sistema (antes de instalar componentes)
 ./update.sh
@@ -15,6 +15,9 @@
 
 # Instalar Zsh y Oh My Zsh, y establecer Zsh como shell por defecto
 ./zsh.sh
+
+# Instalar tmux, TPM, tmux-resurrect y su configuración
+./tmux.sh
 
 # Actualizar nuevamente tras la instalación de componentes
 ./update.sh
